@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# coding: utf-8
+
 class Piece:
     
     def __init__(self, piece, side, a=None, b=None):
@@ -11,7 +14,7 @@ class Piece:
     def pieces(self): return self._cpi
     def side(self): return self._csi
         
-    def onBoard(self, a, b):
+    def onboard(self, a, b):
         self._ca = a
         self._cb = b
     
@@ -49,6 +52,9 @@ class ChPiece(Piece):
         x = dboard.get(self._cage)
         return Piece(self._cpi, self._csi, x[0], x[1])
     
+    def chmove(self, x):
+        self._cage = x
+    
     def __str__(self):
         result = str(self._csi) + ' ' + str(self._cpi) + ' ' + str(self._cage)
         return result
@@ -64,7 +70,10 @@ def detransition(x):
 
 if __name__ == '__main__':
     x = ChPiece('pawn', 'white', 'A1')
-    print(x, x.side, x.pieces, x.files, x.ranks, end = ' ')
-    print(detransition(x.transition()))
-    print(detransition('123'))
+    print(x)
+    x.chmove('A2')
+    print(x)
+    x.chmove(None)
+    print(x)
+
 
